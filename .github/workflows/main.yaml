@@ -26,16 +26,19 @@ jobs:
         with:
           terraform_version: 1.7.2
 
-      - name: Terraform init
+      - name: Initialize Terraform
         run: terraform init
 
-      - name: Terraform format
+      - name: Check Terraform format
         run: terraform fmt -check
 
-      - name: Terraform validate
+      - name: Validate Terraform
         run: terraform validate
 
-      - name: Terraform plan
+      - name: Create Terraform workspace
+        run: terraform workspace new dev
+
+      - name: Plan Terraform
         run: terraform plan -input=false -var-file="$GITHUB_WORKSPACE/environments/dev.tfvars" # -out main.tfplan
 
       # - name: Terraform apply
