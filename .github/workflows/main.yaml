@@ -36,7 +36,7 @@ jobs:
         run: terraform validate
 
       - name: Create Terraform workspace
-        run: terraform workspace new dev
+        run: terraform workspace select -or-create=true dev
 
       - name: Plan Terraform
         run: terraform plan -input=false -var-file="$GITHUB_WORKSPACE/environments/dev.tfvars" # -out main.tfplan
