@@ -5,7 +5,7 @@ locals {
 
   resource_type = {
     resource_group = "rg"
-    key_vault = "kv"
+    key_vault      = "kv"
   }
 
   geo_code = {
