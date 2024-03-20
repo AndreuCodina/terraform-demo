@@ -13,9 +13,10 @@ env:
     TF_LOG: "INFO"
 
 jobs:
-  plan-dev:
+  dev:
     name: Plan dev
     runs-on: ubuntu-latest
+    environment: dev
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
