@@ -1,0 +1,42 @@
+name: Deploy Terraform
+description: Deploy Terraform
+
+inputs:
+  workspace:
+    description: Workspace
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.7.2
+
+    - name: Initialize Terraform
+      run: terraform init
+      shell: bash
+
+    - name: Check Terraform format
+      run: terraform fmt -check
+      shell: bash
+
+    - name: Validate Terraform
+      run: terraform validate
+      shell: bash
+
+    - name: Create Terraform workspace
+      run: terraform workspace select -or-create=true ${{ inputs.workspace }}
+      shell: bash
+
+    - name: Plan Terraform
+      run: terraform plan -input=false -var-file="$GITHUB_WORKSPACE/environments/${{ inputs.workspace }}.tfvars" -out main.tfplan
+      shell: bash
+
+    - name: Terraform apply
+      run: terraform apply -auto-approve main.tfplan
+      shell: bash

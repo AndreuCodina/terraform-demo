@@ -14,32 +14,27 @@ env:
 
 jobs:
   dev:
-    name: Plan dev
+    name: Deploy to development
     runs-on: ubuntu-latest
     environment: dev
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+      - name: Deploy
+        uses: ./.github/actions/deploy-terraform
         with:
-          terraform_version: 1.7.2
+          workspace: "dev"
 
-      - name: Initialize Terraform
-        run: terraform init
+  prod:
+    name: Deploy to production
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Check Terraform format
-        run: terraform fmt -check
-
-      - name: Validate Terraform
-        run: terraform validate
-
-      - name: Create Terraform workspace
-        run: terraform workspace select -or-create=true dev
-
-      - name: Plan Terraform
-        run: terraform plan -input=false -var-file="$GITHUB_WORKSPACE/environments/dev.tfvars" # -out main.tfplan
-
-      # - name: Terraform apply
-      #   run: terraform apply -auto-approve main.tfplan
+      - name: Deploy
+        uses: ./.github/actions/deploy-terraform
+        with:
+          workspace: "prod"
