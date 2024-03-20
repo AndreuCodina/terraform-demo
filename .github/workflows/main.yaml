@@ -43,6 +43,3 @@ jobs:
 
       # - name: Terraform apply
       #   run: terraform apply -auto-approve main.tfplan
-
-# Check has latest changes from main
-# Merge PR to merge branch
