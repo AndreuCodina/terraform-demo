@@ -1,3 +1,3 @@
 projectone = {
-    letter = a
+  letter = "a"
 }
