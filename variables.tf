@@ -1,5 +1,5 @@
-
-
-# variable "projectone__letter" {
-
-# }
+variable "projectone" {
+  type = object({
+    letter = string
+  })
+}
