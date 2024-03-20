@@ -35,7 +35,7 @@ jobs:
         run: terraform validate
 
       - name: Terraform plan
-        run: terraform plan -input=false -var-file="./environments/dev.tfvars" # -out main.tfplan
+        run: terraform plan -input=false -var-file="${{ github.workspace }}./environments/dev.tfvars" # -out main.tfplan
 
       # - name: Terraform apply
       #   run: terraform apply -auto-approve main.tfplan
