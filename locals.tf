@@ -1,6 +1,6 @@
 locals {
   project = {
-    projectone = 3
+    projectone = "projectone"
   }
 
   resource_type = {
