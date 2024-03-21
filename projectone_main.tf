@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "projectone_001" {
-  name     = "${local.resource_type.resource_group}-${local.project.projectone}-${terraform.workspace}-${projectone__letter}-001"
+  name     = "${local.resource_type.resource_group}-${local.project.projectone}-${terraform.workspace}-${var.projectone__letter}-001"
   location = "northeurope"
 }
 
