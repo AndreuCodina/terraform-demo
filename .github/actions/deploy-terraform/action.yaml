@@ -34,7 +34,13 @@ runs:
       shell: bash
 
     - name: Plan Terraform
-      run: terraform plan -input=false -var-file="$GITHUB_WORKSPACE/environments/${{ inputs.workspace }}.tfvars" -out main.tfplan
+      run: |
+        terraform plan \
+          -input=false |
+          -out main.tfplan \
+          -var-file="$GITHUB_WORKSPACE/environments/${{ inputs.workspace }}.tfvars" \
+          -backend-config "projectone__sql_database_server__user=${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__USER }}" \
+          -backend-config "projectone__sql_database_server__password=${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__PASSWORD }}"
       shell: bash
 
     - name: Terraform apply

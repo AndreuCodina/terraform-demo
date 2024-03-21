@@ -14,3 +14,14 @@ resource "azurerm_key_vault" "projectone_001" {
   enable_rbac_authorization     = true
   public_network_access_enabled = true
 }
+
+resource "azurerm_mssql_server" "preparador" {
+  name                                 = "${locals.sql_database_server}-${locals.project.projectone}-${terraform.workspace}-${locals.geo_code.west_europe}-001"
+  resource_group_name                  = data.azurerm_resource_group.projectone_001.name
+  location                             = data.azurerm_resource_group.projectone_001.location
+  version                              = "12.0"
+  administrator_login                  = var.projectone__sql_database_server__user
+  administrator_login_password         = var.projectone__sql_database_server__password
+  public_network_access_enabled        = true
+  outbound_network_restriction_enabled = false
+}
