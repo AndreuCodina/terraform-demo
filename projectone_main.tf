@@ -17,8 +17,8 @@ resource "azurerm_key_vault" "projectone_001" {
 
 resource "azurerm_mssql_server" "projectone_001" {
   name                                 = "${locals.sql_database_server}-${locals.project.projectone}-${terraform.workspace}-${locals.geo_code.west_europe}-001"
-  resource_group_name                  = data.azurerm_resource_group.projectone_001.name
-  location                             = data.azurerm_resource_group.projectone_001.location
+  resource_group_name                  = azurerm_resource_group.projectone_001.name
+  location                             = azurerm_resource_group.projectone_001.location
   version                              = "12.0"
   administrator_login                  = var.projectone__sql_database_server__user
   administrator_login_password         = var.projectone__sql_database_server__password
