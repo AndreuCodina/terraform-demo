@@ -5,13 +5,6 @@ on:
     branches:
       - main
 
-env:
-  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE__SUBSCRIPTION_ID }}
-  ARM_TENANT_ID: ${{ secrets.AZURE__TENANT_ID }}
-  ARM_CLIENT_ID: ${{ secrets.AZURE__CLIENT_ID }}
-  ARM_CLIENT_SECRET: ${{ secrets.AZURE__CLIENT_SECRET }}
-  TF_LOG: "INFO"
-
 jobs:
   dev:
     name: Deploy to dev
