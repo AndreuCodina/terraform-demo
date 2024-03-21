@@ -10,9 +10,17 @@ locals {
     sql_database_server = "sql"
   }
 
-  # https://learn.microsoft.com/en-us/azure/backup/scripts/geo-code-list
-  geo_code = {
-    west_europe  = "we"
-    north_europe = "ne"
+  # name: az account list-locations -o table
+  # geo_code: https://learn.microsoft.com/en-us/azure/backup/scripts/geo-code-list
+  location = {
+    west_europe = {
+      name     = "westeurope"
+      geo_code = "we"
+    }
+
+    north_europe = {
+      name     = "northeurope"
+      geo_code = "ne"
+    }
   }
 }
