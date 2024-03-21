@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "projectone_001" {
-  name     = "${local.resource_type.resource_group}-${local.project.projectone}-${terraform.workspace}-001"
-  location = "westeurope"
+  name     = "${local.resource_type.resource_group}-${local.project.projectone}-${terraform.workspace}-${projectone__letter}-001"
+  location = "northeurope"
 }
 
 resource "azurerm_key_vault" "projectone_001" {

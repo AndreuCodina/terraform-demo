@@ -12,6 +12,7 @@ locals {
 
   # https://learn.microsoft.com/en-us/azure/backup/scripts/geo-code-list
   geo_code = {
-    west_europe = "we"
+    west_europe  = "we"
+    north_europe = "ne"
   }
 }

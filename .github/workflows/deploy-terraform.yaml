@@ -48,11 +48,6 @@ jobs:
         run: terraform workspace select -or-create=true ${{ inputs.terraform-workspace }}
         shell: bash
 
-      - name: Print
-        run: |
-          echo "projectone__sql_database_server__user=$PROJECTONE__SQL_DATABASE_SERVER__USER" && echo "projectone__sql_database_server__password=$PROJECTONE__SQL_DATABASE_SERVER__PASSWORD"
-        shell: bash
-
       - name: Plan Terraform
         run: |
           terraform plan \
