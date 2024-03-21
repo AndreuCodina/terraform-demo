@@ -59,8 +59,8 @@ jobs:
             -input=false \
             -out main.tfplan \
             -var-file="$GITHUB_WORKSPACE/environments/${{ inputs.terraform-workspace }}.tfvars" \
-            -backend-config "projectone__sql_database_server__user=$PROJECTONE__SQL_DATABASE_SERVER__USER" \
-            -backend-config "projectone__sql_database_server__password=$PROJECTONE__SQL_DATABASE_SERVER__PASSWORD"
+            -var="projectone__sql_database_server__user=$PROJECTONE__SQL_DATABASE_SERVER__USER" \
+            -var="projectone__sql_database_server__password=$PROJECTONE__SQL_DATABASE_SERVER__PASSWORD"
         shell: bash
 
       - name: Terraform apply
