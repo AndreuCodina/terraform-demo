@@ -27,4 +27,5 @@ jobs:
     with:
       gith-environment: prod
       terraform-workspace: prod
+    needs: dev
     secrets: inherit
