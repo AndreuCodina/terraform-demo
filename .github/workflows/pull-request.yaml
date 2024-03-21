@@ -14,28 +14,17 @@ env:
 
 jobs:
   dev:
-    name: Deploy to development
-    runs-on: ubuntu-latest
-    environment: dev
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Deploy
-        uses: ./.github/actions/deploy-terraform
-        with:
-          workspace: "dev"
-
+    name: Deploy to dev
+    uses: ./.github/workflows/deploy-terraform.yaml
+    with:
+      gith-environment: dev
+      terraform-workspace: dev
+    secrets: inherit
+  
   prod:
-    name: Deploy to production
-    runs-on: ubuntu-latest
-    environment: prod
-    needs: dev
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Deploy
-        uses: ./.github/actions/deploy-terraform
-        with:
-          workspace: "prod"
+    name: Deploy to prod
+    uses: ./.github/workflows/deploy-terraform.yaml
+    with:
+      gith-environment: prod
+      terraform-workspace: prod
+    secrets: inherit
