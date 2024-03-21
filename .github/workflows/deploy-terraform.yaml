@@ -48,19 +48,24 @@ jobs:
         run: terraform workspace select -or-create=true ${{ inputs.terraform-workspace }}
         shell: bash
 
-      - name: Plan Terraform
+      - name: Print
         run: |
-          terraform plan \
-            -input=false \
-            -out main.tfplan \
-            -var-file="$GITHUB_WORKSPACE/environments/${{ inputs.terraform-workspace }}.tfvars" \
-            -backend-config "projectone__sql_database_server__user=$PROJECTONE__SQL_DATABASE_SERVER__USER" \
-            -backend-config "projectone__sql_database_server__password=$PROJECTONE__SQL_DATABASE_SERVER__PASSWORD"
+          echo "projectone__sql_database_server__user=$PROJECTONE__SQL_DATABASE_SERVER__USER" && echo "projectone__sql_database_server__password=$PROJECTONE__SQL_DATABASE_SERVER__PASSWORD"
         shell: bash
-        env:
-          PROJECTONE__SQL_DATABASE_SERVER__USER: ${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__USER }}
-          PROJECTONE__SQL_DATABASE_SERVER__PASSWORD: ${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__PASSWORD }}
 
-      - name: Terraform apply
-        run: terraform apply -auto-approve main.tfplan
-        shell: bash
+      # - name: Plan Terraform
+      #   run: |
+      #     terraform plan \
+      #       -input=false \
+      #       -out main.tfplan \
+      #       -var-file="$GITHUB_WORKSPACE/environments/${{ inputs.terraform-workspace }}.tfvars" \
+      #       -backend-config "projectone__sql_database_server__user=$PROJECTONE__SQL_DATABASE_SERVER__USER" \
+      #       -backend-config "projectone__sql_database_server__password=$PROJECTONE__SQL_DATABASE_SERVER__PASSWORD"
+      #   shell: bash
+      #   env:
+      #     PROJECTONE__SQL_DATABASE_SERVER__USER: ${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__USER }}
+      #     PROJECTONE__SQL_DATABASE_SERVER__PASSWORD: ${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__PASSWORD }}
+
+      # - name: Terraform apply
+      #   run: terraform apply -auto-approve main.tfplan
+      #   shell: bash
