@@ -15,13 +15,13 @@ resource "azurerm_key_vault" "projectone_001" {
   public_network_access_enabled = true
 }
 
-resource "azurerm_mssql_server" "projectone_001" {
-  name                                 = "${local.resource_type.sql_database_server}-${local.project.projectone}-${terraform.workspace}-${local.location.north_europe.geo_code}-001"
-  resource_group_name                  = azurerm_resource_group.projectone_001.name
-  location                             = azurerm_resource_group.projectone_001.location
-  version                              = "12.0"
-  administrator_login                  = var.projectone__sql_database_server__user
-  administrator_login_password         = var.projectone__sql_database_server__password
-  public_network_access_enabled        = true
-  outbound_network_restriction_enabled = false
-}
+# resource "azurerm_mssql_server" "projectone_001" {
+#   name                                 = "${local.resource_type.sql_database_server}-${local.project.projectone}-${terraform.workspace}-${local.location.north_europe.geo_code}-001"
+#   resource_group_name                  = azurerm_resource_group.projectone_001.name
+#   location                             = azurerm_resource_group.projectone_001.location
+#   version                              = "12.0"
+#   administrator_login                  = var.projectone__sql_database_server__user
+#   administrator_login_password         = var.projectone__sql_database_server__password
+#   public_network_access_enabled        = true
+#   outbound_network_restriction_enabled = false
+# }
