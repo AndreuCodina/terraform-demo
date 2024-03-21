@@ -36,7 +36,7 @@ runs:
     - name: Plan Terraform
       run: |
         terraform plan \
-          -input=false |
+          -input=false \
           -out main.tfplan \
           -var-file="$GITHUB_WORKSPACE/environments/${{ inputs.workspace }}.tfvars" \
           -backend-config "projectone__sql_database_server__user=$PROJECTONE__SQL_DATABASE_SERVER__USER" \
