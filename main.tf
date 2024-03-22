@@ -1,7 +1,7 @@
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_resource_group" "projectone_001" {
-  name     = "${local.resource_type.resource_group}-${project_name}-${terraform.workspace}-001"
+  name     = "${local.resource_type.resource_group}-${local.project_name}-${terraform.workspace}-001"
   location = local.location.north_europe.name
 }
 
