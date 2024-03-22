@@ -1,0 +1,35 @@
+{
+	"name": "terraform-demo-environments",
+	"image": "mcr.microsoft.com/devcontainers/base:1.0.7-bookworm",
+	"postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+	"features": {
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/devcontainers/features/azure-cli:1": {
+			"version": "2.56.0"
+		},
+		"ghcr.io/devcontainers/features/terraform:1": {
+			"version": "1.7.2"
+		},
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+			"version": "1.27"
+		},
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.vscode-node-azure-pack",
+				"HashiCorp.HCL",
+				"hashicorp.terraform",
+				"ms-azuretools.vscode-azureterraform",
+				"ms-azuretools.vscode-docker",
+				"ms-toolsai.vscode-ai",
+				"github.vscode-github-actions"
+			],
+			"settings": {
+				// https://github.com/microsoft/vscode/issues/174632
+				"extensions.verifySignature": false
+			}
+		}
+	}
+}

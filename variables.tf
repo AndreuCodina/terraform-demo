@@ -3,11 +3,11 @@ variable "kv_projectone_001_sku_name" {
 }
 
 variable "sql_projectone_001_login" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "sql_projectone_001_password" {
-  type = string
+  type      = string
   sensitive = true
 }
