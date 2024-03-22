@@ -1,1 +1,1 @@
-projectone__letter = "p"
+kv_projectone_001_sku_name = "standard"
