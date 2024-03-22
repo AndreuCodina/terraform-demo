@@ -1,12 +1,12 @@
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_resource_group" "projectone_001" {
-  name     = "${local.resource_type.resource_group}-${local.project.projectone}-${terraform.workspace}-001"
+  name     = "${local.resource_type.resource_group}-${project_name}-${terraform.workspace}-001"
   location = local.location.north_europe.name
 }
 
 resource "azurerm_key_vault" "projectone_001" {
-  name                          = "${local.resource_type.key_vault}-${local.project.projectone}-${terraform.workspace}-${local.location.north_europe.geo_code}-001"
+  name                          = "${local.resource_type.key_vault}-${local.project_name}-${terraform.workspace}-${local.location.north_europe.geo_code}-001"
   location                      = azurerm_resource_group.projectone_001.location
   resource_group_name           = azurerm_resource_group.projectone_001.name
   tenant_id                     = data.azurerm_client_config.current.tenant_id
@@ -18,7 +18,7 @@ resource "azurerm_key_vault" "projectone_001" {
 }
 
 resource "azurerm_mssql_server" "projectone_001" {
-  name                                 = "${local.resource_type.sql_database_server}-${local.project.projectone}-${terraform.workspace}-${local.location.north_europe.geo_code}-001"
+  name                                 = "${local.resource_type.sql_database_server}-${local.project_name}-${terraform.workspace}-${local.location.north_europe.geo_code}-001"
   resource_group_name                  = azurerm_resource_group.projectone_001.name
   location                             = azurerm_resource_group.projectone_001.location
   version                              = "12.0"
