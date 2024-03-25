@@ -9,6 +9,9 @@ on:
       terraform-workspace:
         required: true
         type: string
+      apply:
+        required: true
+        type: boolean
 
 env:
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE__SUBSCRIPTION_ID }}
@@ -59,5 +62,6 @@ jobs:
         shell: bash
 
       - name: Terraform apply
+        if: ${{ inputs.apply }}
         run: terraform apply -auto-approve main.tfplan
         shell: bash

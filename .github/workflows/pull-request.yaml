@@ -6,19 +6,41 @@ on:
       - main
 
 jobs:
-  dev:
-    name: Deploy to dev
+  plan-dev:
+    name: Create Terraform plan
     uses: ./.github/workflows/deploy-terraform.yaml
     with:
       gith-environment: dev
       terraform-workspace: dev
+      apply: false
+    secrets: inherit
+
+  deploy-dev:
+    name: Create Terraform plan
+    uses: ./.github/workflows/deploy-terraform.yaml
+    with:
+      gith-environment: dev
+      terraform-workspace: dev
+      apply: true
+    needs: plan-dev
     secrets: inherit
   
-  prod:
+  plan-prod:
     name: Deploy to prod
     uses: ./.github/workflows/deploy-terraform.yaml
     with:
       gith-environment: prod
       terraform-workspace: prod
-    needs: dev
+      apply: false
+    needs: deploy-dev
+    secrets: inherit
+
+  deploy-prod:
+    name: Deploy to prod
+    uses: ./.github/workflows/deploy-terraform.yaml
+    with:
+      gith-environment: prod
+      terraform-workspace: prod
+      apply: false
+    needs: plan-prod
     secrets: inherit
