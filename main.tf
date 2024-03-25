@@ -28,10 +28,10 @@ resource "azurerm_key_vault" "projectone_001" {
 #   outbound_network_restriction_enabled = false
 # }
 
-# resource "azurerm_databricks_workspace" "projectone_001" {
-#   count               = terraform.workspace == "dev" ? 1 : 0
-#   name                = "${local.resource_type.databricks_workspace}-${local.project_name}-${terraform.workspace}-${local.location.north_europe.geo_code}-001"
-#   resource_group_name = azurerm_resource_group.projectone_001.name
-#   location            = azurerm_resource_group.projectone_001.location
-#   sku                 = "standard"
-# }
+resource "azurerm_databricks_workspace" "projectone_001" {
+  count               = terraform.workspace == "dev" ? 1 : 0
+  name                = "${local.resource_type.databricks_workspace}-${local.project_name}-${terraform.workspace}-${local.location.north_europe.geo_code}-001"
+  resource_group_name = azurerm_resource_group.projectone_001.name
+  location            = azurerm_resource_group.projectone_001.location
+  sku                 = "standard"
+}

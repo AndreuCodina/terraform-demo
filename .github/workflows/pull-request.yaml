@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  plan-dev:
-    name: Create Terraform plan
+  preview-plan-dev:
+    name: Preview dev plan
     uses: ./.github/workflows/deploy-terraform.yaml
     with:
       gith-environment: dev
@@ -16,17 +16,17 @@ jobs:
     secrets: inherit
 
   deploy-dev:
-    name: Create Terraform plan
+    name: Deploy dev plan
     uses: ./.github/workflows/deploy-terraform.yaml
     with:
       gith-environment: dev
       terraform-workspace: dev
       apply: true
-    needs: plan-dev
+    needs: preview-plan-dev
     secrets: inherit
   
-  plan-prod:
-    name: Deploy to prod
+  preview-prod-plan:
+    name: Preview prod plan
     uses: ./.github/workflows/deploy-terraform.yaml
     with:
       gith-environment: prod
@@ -36,11 +36,11 @@ jobs:
     secrets: inherit
 
   deploy-prod:
-    name: Deploy to prod
+    name: Deploy prod plan
     uses: ./.github/workflows/deploy-terraform.yaml
     with:
       gith-environment: prod
       terraform-workspace: prod
-      apply: false
-    needs: plan-prod
+      apply: true
+    needs: preview-prod-plan
     secrets: inherit
