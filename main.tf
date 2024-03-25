@@ -7,8 +7,8 @@ resource "azurerm_resource_group" "projectone_001" {
 
 resource "azurerm_key_vault" "projectone_001" {
   name                          = "${local.resource_type.key_vault}-${local.project_name}-${terraform.workspace}-${local.location.north_europe.geo_code}-001"
-  location                      = azurerm_resource_group.projectone_001.location
   resource_group_name           = azurerm_resource_group.projectone_001.name
+  location                      = azurerm_resource_group.projectone_001.location
   tenant_id                     = data.azurerm_client_config.current.tenant_id
   sku_name                      = var.kv_projectone_001_sku_name
   soft_delete_retention_days    = 7
@@ -27,3 +27,10 @@ resource "azurerm_key_vault" "projectone_001" {
 #   public_network_access_enabled        = true
 #   outbound_network_restriction_enabled = false
 # }
+
+resource "azurerm_databricks_workspace" "projectone_001" {
+  name                = "${local.resource_type.databricks_workspace}-${local.project_name}-${terraform.workspace}-${local.location.north_europe.geo_code}-001"
+  resource_group_name = azurerm_resource_group.projectone_001.name
+  location            = azurerm_resource_group.projectone_001.location
+  sku                 = "standard"
+}
