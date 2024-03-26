@@ -39,14 +39,6 @@ jobs:
         run: terraform init
         shell: bash
 
-      - name: Check Terraform format
-        run: terraform fmt -check
-        shell: bash
-
-      - name: Validate Terraform
-        run: terraform validate
-        shell: bash
-
       - name: Create Terraform workspace
         run: terraform workspace select -or-create=true ${{ inputs.terraform-workspace }}
         shell: bash

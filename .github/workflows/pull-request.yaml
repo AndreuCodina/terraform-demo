@@ -6,6 +6,30 @@ on:
       - main
 
 jobs:
+  lint:
+    name: Validate Terraform
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.2
+
+      - name: Initialize Terraform
+        run: terraform init -backend=false
+        shell: bash
+
+      - name: Check Terraform format
+        run: terraform fmt -check -list=true
+        shell: bash
+
+      - name: Validate code
+        run: terraform validate
+        shell: bash
+
   preview-plan-dev:
     name: Preview dev plan
     uses: ./.github/workflows/deploy-terraform.yaml
