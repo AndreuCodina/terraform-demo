@@ -35,3 +35,10 @@ resource "azurerm_databricks_workspace" "projectone_001" {
   location            = azurerm_resource_group.projectone_001.location
   sku                 = "standard"
 }
+
+resource "azurerm_databricks_workspace" "projectone_001test" {
+  name                = "${local.resource_type.databricks_workspace}-test-${terraform.workspace}-${local.location.north_europe.geo_code}-001"
+  resource_group_name = azurerm_resource_group.projectone_001.name
+  location            = azurerm_resource_group.projectone_001.location
+  sku                 = "standard"
+}
