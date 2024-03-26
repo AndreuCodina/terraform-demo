@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  lint:
+  validate-terraform:
     name: Validate Terraform
     runs-on: ubuntu-latest
     steps:
