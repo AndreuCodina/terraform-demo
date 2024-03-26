@@ -3,6 +3,9 @@ name: Deploy Terraform
 on:
   workflow_call:
     inputs:
+      gith-environment:
+        required: true
+        type: string
       terraform-workspace:
         required: true
         type: string
@@ -22,7 +25,7 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: ${{ github.event.deployment.environment  }}
+    environment: ${{ inputs.gith-environment }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
