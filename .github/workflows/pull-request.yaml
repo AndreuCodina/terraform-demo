@@ -37,6 +37,7 @@ jobs:
       gith-environment: dev
       terraform-workspace: dev
       apply: false
+    needs: validate-terraform
     secrets: inherit
 
   deploy-dev:
