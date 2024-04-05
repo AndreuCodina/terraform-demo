@@ -19,8 +19,6 @@ env:
   ARM_CLIENT_ID: ${{ secrets.AZURE__CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.AZURE__CLIENT_SECRET }}
   TF_LOG: "INFO"
-  SQL_PROJECTONE_001_LOGIN: ${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__USER }}
-  SQL_PROJECTONE_001_PASSWORD: ${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__PASSWORD }}
 
 jobs:
   deploy:
@@ -49,8 +47,8 @@ jobs:
             -input=false \
             -out main.tfplan \
             -var-file="$GITHUB_WORKSPACE/environments/${{ inputs.terraform-workspace }}.tfvars" \
-            -var="sql_projectone_001_login=$SQL_PROJECTONE_001_LOGIN" \
-            -var="sql_projectone_001_password=$SQL_PROJECTONE_001_PASSWORD"
+            -var="sql_ne_prjo_001_login=${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__USER }}" \
+            -var="sql_ne_prjo_001_password=${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__PASSWORD }}"
         shell: bash
 
       - name: Terraform apply
