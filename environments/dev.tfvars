@@ -1,1 +1,1 @@
-kv_ne_prjo_001_sku_name = "standard"
+kv_prjo_ne_001_sku_name = "standard"
