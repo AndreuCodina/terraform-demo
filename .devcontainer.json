@@ -1,10 +1,7 @@
 {
-	"name": "terraform-demo",
-	"dockerFile": "Dockerfile",
+	"name": "terraform-demo-environments",
+	"image": "mcr.microsoft.com/devcontainers/base:1.0.7-bookworm",
 	"postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
-	"remoteEnv": {
-		"PATH": "${containerEnv:PATH}:/utilities"
-	},
 	"features": {
 		"ghcr.io/devcontainers/features/github-cli:1": {},
 		"ghcr.io/devcontainers/features/azure-cli:1": {

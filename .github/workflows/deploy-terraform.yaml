@@ -1,0 +1,57 @@
+name: Deploy Terraform
+
+on:
+  workflow_call:
+    inputs:
+      gith-environment:
+        required: true
+        type: string
+      terraform-workspace:
+        required: true
+        type: string
+      apply:
+        required: true
+        type: boolean
+
+env:
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE__SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE__TENANT_ID }}
+  ARM_CLIENT_ID: ${{ secrets.AZURE__CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.AZURE__CLIENT_SECRET }}
+  TF_LOG: "INFO"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.gith-environment }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.2
+
+      - name: Initialize Terraform
+        run: terraform init
+        shell: bash
+
+      - name: Create Terraform workspace
+        run: terraform workspace select -or-create=true ${{ inputs.terraform-workspace }}
+        shell: bash
+
+      - name: Plan Terraform
+        run: |
+          terraform plan \
+            -input=false \
+            -out main.tfplan \
+            -var-file="$GITHUB_WORKSPACE/environments/${{ inputs.terraform-workspace }}.tfvars" \
+            -var="sql_prjo_ne_001_login=${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__USER }}" \
+            -var="sql_prjo_ne_001_password=${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__PASSWORD }}"
+        shell: bash
+
+      - name: Terraform apply
+        if: ${{ inputs.apply }}
+        run: terraform apply -auto-approve main.tfplan
+        shell: bash

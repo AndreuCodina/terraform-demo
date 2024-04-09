@@ -1,0 +1,71 @@
+name: Pull request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate-terraform:
+    name: Validate Terraform
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.2
+
+      - name: Initialize Terraform
+        run: terraform init -backend=false
+        shell: bash
+
+      - name: Check Terraform format
+        run: terraform fmt -check -list=true
+        shell: bash
+
+      - name: Validate code
+        run: terraform validate
+        shell: bash
+
+  preview-plan-dev:
+    name: Preview dev plan
+    uses: ./.github/workflows/deploy-terraform.yaml
+    with:
+      gith-environment: dev
+      terraform-workspace: dev
+      apply: false
+    needs: validate-terraform
+    secrets: inherit
+
+  deploy-dev:
+    name: Deploy dev plan
+    uses: ./.github/workflows/deploy-terraform.yaml
+    with:
+      gith-environment: dev
+      terraform-workspace: dev
+      apply: true
+    needs: preview-plan-dev
+    secrets: inherit
+  
+  preview-prod-plan:
+    name: Preview prod plan
+    uses: ./.github/workflows/deploy-terraform.yaml
+    with:
+      gith-environment: prod
+      terraform-workspace: prod
+      apply: false
+    needs: deploy-dev
+    secrets: inherit
+
+  deploy-prod:
+    name: Deploy prod plan
+    uses: ./.github/workflows/deploy-terraform.yaml
+    with:
+      gith-environment: prod
+      terraform-workspace: prod
+      apply: true
+    needs: preview-prod-plan
+    secrets: inherit
