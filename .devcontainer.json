@@ -9,11 +9,7 @@
 		},
 		"ghcr.io/devcontainers/features/terraform:1": {
 			"version": "1.7.2"
-		},
-		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
-			"version": "1.27"
-		},
-		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+		}
 	},
 	"customizations": {
 		"vscode": {
