@@ -2,9 +2,9 @@ terraform {
   required_version = "= 1.7.5"
 
   backend "azurerm" {
-    resource_group_name  = "${local.resource_type.resource_group}-tf-${local.workspace.prod}-${local.location.north_europe.geo_code}-001"
-    storage_account_name = "${local.resource_type.storage}tf${local.workspace.prod}${local.location.north_europe.geo_code}001"
-    container_name       = "${local.project}-tfstate"
+    resource_group_name  = "rg-tf-prod-ne-001"
+    storage_account_name = "sttfprodne001"
+    container_name       = "prjo-tfstate"
     key                  = "terraform.tfstate"
   }
 
