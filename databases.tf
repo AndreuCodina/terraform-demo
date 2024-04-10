@@ -1,5 +1,5 @@
 # resource "azurerm_mssql_server" "prjo_ne_001" {
-#   name                                 = "${local.resource_type.sql_database_server}-${local.project_name}-${terraform.workspace}-${local.location.north_europe.geo_code}-001"
+#   name                                 = "${local.resource_type.sql_database_server}-${local.project}-${terraform.workspace}-${local.location.north_europe.geo_code}-001"
 #   resource_group_name                  = azurerm_resource_group.ne_prjo_001.name
 #   location                             = local.location.north_europe.name
 #   version                              = "12.0"

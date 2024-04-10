@@ -1,5 +1,5 @@
 # resource "azurerm_key_vault" "prjo_ne_001" {
-#   name                          = "${local.resource_type.key_vault}-${local.project_name}-${terraform.workspace}-${local.location.north_europe.geo_code}-001"
+#   name                          = "${local.resource_type.key_vault}-${local.project}-${terraform.workspace}-${local.location.north_europe.geo_code}-001"
 #   resource_group_name           = azurerm_resource_group.prjo_ne_001.name
 #   location                      = local.location.north_europe.name
 #   tenant_id                     = data.azurerm_client_config.current.tenant_id
