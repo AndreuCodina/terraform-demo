@@ -1,10 +1,10 @@
 terraform {
-  required_version = "= 1.7.2"
+  required_version = "= 1.7.5"
 
   backend "azurerm" {
-    resource_group_name  = "rg-showterraform-prod-001"
-    storage_account_name = "stshowterraformprod001"
-    container_name       = "tfstate"
+    resource_group_name  = "rg-tf-prod-ne-001"
+    storage_account_name = "sttfprodne001"
+    container_name       = "prjo-tfstate"
     key                  = "terraform.tfstate"
   }
 

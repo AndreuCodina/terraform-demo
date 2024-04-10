@@ -4,8 +4,9 @@
 	"postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
 	"features": {
 		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/devcontainers/features/azure-cli:1": {},
 		"ghcr.io/devcontainers/features/terraform:1": {
-			"version": "1.7.2"
+			"version": "1.7.5"
 		}
 	},
 	"customizations": {

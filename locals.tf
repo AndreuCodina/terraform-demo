@@ -1,5 +1,5 @@
 locals {
-  project_name = "prjo"
+  project = "prjo"
 
   workspace = {
     dev  = "dev"
@@ -7,12 +7,14 @@ locals {
     prod = "prod"
   }
 
+
   # https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations
   resource_type = {
     resource_group       = "rg"
     key_vault            = "kv"
     sql_database_server  = "sql"
     databricks_workspace = "dbw"
+    storage_account      = "sa"
   }
 
   # name: az account list-locations -o table
