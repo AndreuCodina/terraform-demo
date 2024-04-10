@@ -1,5 +1,5 @@
 terraform {
-  required_version = "= 1.7.2"
+  required_version = "= 1.8.0"
 
   backend "azurerm" {
     resource_group_name  = "rg-showterraform-prod-001"
