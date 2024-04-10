@@ -46,7 +46,7 @@ jobs:
           terraform plan \
             -input=false \
             -out main.tfplan \
-            -var-file="$GITHUB_WORKSPACE/environments/${{ inputs.terraform-workspace }}.tfvars" \
+            -var-file="$GITHUB_WORKSPACE/workspaces/${{ inputs.terraform-workspace }}.tfvars" \
             -var="sql_prjo_ne_001_login=${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__USER }}" \
             -var="sql_prjo_ne_001_password=${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__PASSWORD }}"
         shell: bash
