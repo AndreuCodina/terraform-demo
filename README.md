@@ -1,16 +1,24 @@
-# Steps for a company with a Terraform repository per project
+# Introduction
+
+You want to have a Terraform repository per project, deploying a shared Terraform code to several environments: development, staging and production.
+
+Your company has decided to use Azure instead of Terraform Cloud to store de Terraform state, so you'll create only one Resource Group with a Storage Account to store the Terraform state of all the projects in all environments. You'll use a container for each project and configure backups for the Storage Account.
+
+### Create the Azure resources
 
 `prjo` is the project name.
 
-- Create a resource group to store the Terraform state (e.g. `rg-tf-prod-ne-001`).
+- Create a Resource Group to store the Terraform state (e.g. `rg-tf-prod-ne-001`).
 
-- Create a storage account (e.g. `sttfprodne001`).
+- Create a Storage Account (e.g. `sttfprodne001`) with Zone-Redundant Storage redundancy, and soft delete for containers and blobs.
 
 - Create a container (e.g. `prjo-tfstate`).
 
-- Create a service principal to execute Terraform in the project (e.g. `sp-tfprjo`).
+### Setup the Service Principal for Terraform for a project
 
-- To the service principal, assign the role `Storage Blob Data Contributor` in the container where the Terraform state will be stored:
+- Create a Service Principal to execute Terraform in the project (e.g. `sp-tfprjo`).
+
+- To the Service Principal, assign the role `Storage Blob Data Contributor` in the container where the Terraform state will be stored. You can use the Azure Portal or this command:
 
     ```bash
     az role assignment create \
@@ -18,3 +26,10 @@
         --role "Storage Blob Data Contributor" \
         --scope "/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<storage_account>/blobServices/default/containers/<container_name>"
     ```
+
+### Configure backups for the Terraform state
+
+- Create a Backup Vault (e.g. `bvault-tf-prod-ne-001`).
+- In the Storage Account, assign the role `Storage Account Backup Contributor` to the Backup Vault.
+- In the Backup Vault, Create a Backup Vault Policy (e.g. `bkpol-sttf-prod-ne-001`).
+- In the Backup Vault, create a backup, specifying the Backup Vault Policy and the Storage Account as data source.
