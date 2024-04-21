@@ -50,22 +50,22 @@ jobs:
     needs: preview-plan-dev
     secrets: inherit
   
-  preview-prod-plan:
-    name: Preview prod plan
-    uses: ./.github/workflows/deploy-terraform.yaml
-    with:
-      gith-environment: prod
-      terraform-workspace: prod
-      apply: false
-    needs: deploy-dev
-    secrets: inherit
+  # preview-prod-plan:
+  #   name: Preview prod plan
+  #   uses: ./.github/workflows/deploy-terraform.yaml
+  #   with:
+  #     gith-environment: prod
+  #     terraform-workspace: prod
+  #     apply: false
+  #   needs: deploy-dev
+  #   secrets: inherit
 
-  deploy-prod:
-    name: Deploy prod plan
-    uses: ./.github/workflows/deploy-terraform.yaml
-    with:
-      gith-environment: prod
-      terraform-workspace: prod
-      apply: true
-    needs: preview-prod-plan
-    secrets: inherit
+  # deploy-prod:
+  #   name: Deploy prod plan
+  #   uses: ./.github/workflows/deploy-terraform.yaml
+  #   with:
+  #     gith-environment: prod
+  #     terraform-workspace: prod
+  #     apply: true
+  #   needs: preview-prod-plan
+  #   secrets: inherit
