@@ -18,6 +18,16 @@ Your company has decided to use Azure instead of Terraform Cloud to store de Ter
 
 - Create a Service Principal to execute Terraform in the project (e.g. `sp-tfprjo`).
 
+- Create a resource group.
+
+- To the Service Principal, assign the role `User Access Administrator` to the resource group with the condition "Allow user to assign all roles except privileged administrator roles Owner, UAA, RBAC (Recommended)".
+
+<!-- - Create resource groups (e.g. rg-prjo-dev-ne-001 and rg-prjo-prod-ne-001) -->
+<!-- - To the service principal, assign the role `Owner` in the RG, so it can assign roles ??? -->
+<!-- Test: Create AKS and delete it, so we can check if the SP can delete the resource group automatically when Terraform deletes the AKS resource -->
+<!-- prevent service principal delete other resource groups terraform -->
+<!-- Puedo proporcionar un scope a RBAC que aún no existe? Me refiero al resource group que tendría que crear Terraform -->
+
 - To the Service Principal, assign the role `Storage Blob Data Contributor` in the container where the Terraform state will be stored. You can use the Azure Portal or this command:
 
     ```bash
