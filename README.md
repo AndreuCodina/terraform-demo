@@ -1,4 +1,4 @@
-# Introduction
+### Introduction
 
 You want to have a Terraform repository per project, deploying a shared Terraform code to several environments: development, staging and production.
 
@@ -33,3 +33,47 @@ Your company has decided to use Azure instead of Terraform Cloud to store de Ter
 - In the Storage Account, assign the role `Storage Account Backup Contributor` to the Backup Vault.
 - In the Backup Vault, Create a Backup Vault Policy (e.g. `bkpol-sttf-prod-ne-001`).
 - In the Backup Vault, create a backup, specifying the Backup Vault Policy and the Storage Account as data source.
+
+### Nomenclatures
+
+- **Resource names:**
+    - **Azure:**
+    `{resource_type}-{application}-{environment}-{location}-{sequential_number}`.
+
+    - **Terraform:**
+    `{application}_{location}_{sequential_number}`.
+
+    `{application}` can be a compound name splitted by hyphens to have unique resource names in the subscription.
+
+    Example:
+
+    ```terraform
+    resource "azurerm_service_plan" "prjo_ne_001" {
+        name = "asp-prjo-dev-ne-001"
+        ...
+    }
+
+    resource "azurerm_linux_web_app" "backend_prjo_ne_001" {
+        name = "app-backend-prjo-dev-ne-001"
+        ...
+    }
+
+    resource "azurerm_linux_web_app" "frontend_prjo_ne_001" {
+        name = "app-backend-prjo-dev-ne-001"
+        ...
+    }
+    ```
+
+- **Roles:** `{who}_with_{role_name}`. Example:
+
+    ```terraform
+    resource "azurerm_role_assignment" "backend_prjo_ne_001_with_key_vault_administrator" {
+        scope                = azurerm_key_vault.prjo_ne_001.id
+        role_definition_name = "Key Vault Administrator"
+        principal_id         = azurerm_linux_web_app.backend_prjo_ne_001.identity[0].principal_id
+    }
+    ```
+
+### Import existing resource to Terraform
+
+`terraform import`
