@@ -16,17 +16,11 @@ Your company has decided to use Azure instead of Terraform Cloud to store de Ter
 
 ### Setup the Service Principal for Terraform for a project
 
+- Create a resource group per environment.
+
 - Create a Service Principal to execute Terraform in the project (e.g. `sp-tfprjo`).
 
-- Create a resource group.
-
-- To the Service Principal, assign the role `User Access Administrator` to the resource group with the condition "Allow user to assign all roles except privileged administrator roles Owner, UAA, RBAC (Recommended)".
-
-<!-- - Create resource groups (e.g. rg-prjo-dev-ne-001 and rg-prjo-prod-ne-001) -->
-<!-- - To the service principal, assign the role `Owner` in the RG, so it can assign roles ??? -->
-<!-- Test: Create AKS and delete it, so we can check if the SP can delete the resource group automatically when Terraform deletes the AKS resource -->
-<!-- prevent service principal delete other resource groups terraform -->
-<!-- Puedo proporcionar un scope a RBAC que aún no existe? Me refiero al resource group que tendría que crear Terraform -->
+- To the Service Principal, assign the role `User Access Administrator` to the resource groups with the condition "Allow user to assign all roles except privileged administrator roles Owner, UAA, RBAC (Recommended)".
 
 - To the Service Principal, assign the role `Storage Blob Data Contributor` in the container where the Terraform state will be stored. You can use the Azure Portal or this command:
 
@@ -74,10 +68,10 @@ Your company has decided to use Azure instead of Terraform Cloud to store de Ter
     }
     ```
 
-- **Roles:** `{who}_with_{role_name}`. Example:
+- **Roles:** `{who}_with_{role_name}_in_{resource}`. Example:
 
     ```terraform
-    resource "azurerm_role_assignment" "backend_prjo_ne_001_with_key_vault_administrator" {
+    resource "azurerm_role_assignment" "backend_prjo_ne_001_with_key_vault_administrator_in_kv_prjo_ne_001" {
         scope                = azurerm_key_vault.prjo_ne_001.id
         role_definition_name = "Key Vault Administrator"
         principal_id         = azurerm_linux_web_app.backend_prjo_ne_001.identity[0].principal_id

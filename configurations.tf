@@ -10,12 +10,9 @@ resource "azurerm_key_vault" "prjo_ne_001" {
   public_network_access_enabled = true
 }
 
-# add the "azure key vault administrator" ROLE to current azurerm_client_config
-
-
-
 resource "azurerm_key_vault_secret" "prjo_ne_001" {
   name         = "SQL-SERVER--PASSWORD"
   value        = "MyPassword"
   key_vault_id = azurerm_key_vault.prjo_ne_001.id
+  depends_on   = [azurerm_role_assignment.current_identity_with_key_vault_administrator_in_kv_prjo_ne_001]
 }
