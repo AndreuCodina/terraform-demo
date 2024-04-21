@@ -14,12 +14,12 @@ resource "azurerm_key_vault_secret" "sql_server__password_prjo_ne_001" {
   name         = "SQL-SERVER--PASSWORD"
   value        = "SqlServerPassword"
   key_vault_id = azurerm_key_vault.prjo_ne_001.id
-  depends_on   = [azurerm_role_assignment.current_identity_with_key_vault_administrator_in_kv_prjo_ne_001]
+  depends_on   = [azurerm_role_assignment.current_service_principal_with_key_vault_administrator_in_kv_prjo_ne_001]
 }
 
 resource "azurerm_key_vault_secret" "my_password_prjo_ne_001" {
   name         = "MY-PASSWORD"
   value        = "MyPassword"
   key_vault_id = azurerm_key_vault.prjo_ne_001.id
-  depends_on   = [azurerm_role_assignment.current_identity_with_key_vault_administrator_in_kv_prjo_ne_001]
+  depends_on   = [azurerm_role_assignment.current_service_principal_with_key_vault_administrator_in_kv_prjo_ne_001]
 }
