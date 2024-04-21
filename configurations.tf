@@ -9,3 +9,9 @@ resource "azurerm_key_vault" "prjo_ne_001" {
   enable_rbac_authorization     = true
   public_network_access_enabled = true
 }
+
+resource "azurerm_key_vault_secret" "prjo_ne_001" {
+  name         = "SQL_SERVER__PASSWORD"
+  value        = "MyPassword"
+  key_vault_id = azurerm_key_vault.prjo_ne_001.id
+}
