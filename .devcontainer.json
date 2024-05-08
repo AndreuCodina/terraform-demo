@@ -1,6 +1,6 @@
 {
 	"name": "terraform-demo-environments",
-	"image": "mcr.microsoft.com/devcontainers/base:1.0.7-bookworm",
+	"image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
 	"postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
 	"features": {
 		"ghcr.io/devcontainers/features/github-cli:1": {},
