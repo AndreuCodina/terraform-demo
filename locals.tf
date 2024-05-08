@@ -2,9 +2,9 @@ locals {
   project = "prjo"
 
   workspace = {
-    dev  = "dev"
-    stg  = "stage"
-    prod = "prod"
+    dev   = "dev"
+    stage = "stage"
+    prod  = "prod"
   }
 
 
