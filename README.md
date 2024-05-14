@@ -12,7 +12,7 @@ Your company has decided to use Azure instead of Terraform Cloud to store de Ter
     
     or in Terraform code
 
-    `${local.resource_type.app_service}-{local.project}-${terraform.workspace}-${local.location.north_europe.name}-001`
+    `${local.resource_type.app_service}-${local.project}-${terraform.workspace}-${local.location.north_europe.geo_code}-001`
 
     - **Terraform:**
     `{application}_{location}_{sequential_number}`.
