@@ -31,24 +31,19 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.8.2
+          terraform_version: 1.8.5
 
       - name: Initialize Terraform
         run: terraform init
         shell: bash
 
-      - name: Create Terraform workspace
+      - name: Select Terraform workspace
         run: terraform workspace select -or-create=true ${{ inputs.terraform-workspace }}
         shell: bash
 
       - name: Plan Terraform
         run: |
-          terraform plan \
-            -input=false \
-            -out main.tfplan \
-            -var-file="$GITHUB_WORKSPACE/workspaces/${{ inputs.terraform-workspace }}.tfvars" \
-            -var="sql_prjo_ne_001_login=${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__USER }}" \
-            -var="sql_prjo_ne_001_password=${{ secrets.PROJECTONE__SQL_DATABASE_SERVER__PASSWORD }}"
+          terraform plan -input=false -out main.tfplan 
         shell: bash
 
       - name: Terraform apply
