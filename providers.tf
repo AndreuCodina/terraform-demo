@@ -1,22 +1,22 @@
 terraform {
-  required_version = "= 1.8.2"
+  required_version = "= 1.8.5"
 
   backend "azurerm" {
-    resource_group_name  = "rg-tf-prod-ne-001"
-    storage_account_name = "sttfprodne001"
-    container_name       = "prjo-tfstate"
+    resource_group_name  = "rg-terraform-prod-ne-001"
+    storage_account_name = "stterraformprodne001"
+    container_name       = "myproj-tfstate"
     key                  = "terraform.tfstate"
   }
 
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "= 3.103.1"
+      version = "= 3.109.0"
     }
 
     azuread = {
       source  = "hashicorp/azuread"
-      version = "= 2.49.0"
+      version = "= 2.52.0"
     }
   }
 }

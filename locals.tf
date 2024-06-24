@@ -1,12 +1,13 @@
 locals {
-  project = "prjo"
+  project = "myproj"
 
   workspace = {
     dev   = "dev"
-    stage = "stage"
+    stage = "stg"
     prod  = "prod"
   }
 
+  configuration = jsondecode(file("./workspaces/${terraform.workspace}.tfvars.json"))
 
   # https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations
   resource_type = {
