@@ -37,7 +37,7 @@ jobs:
         run: terraform init
         shell: bash
 
-      - name: Create Terraform workspace
+      - name: Select Terraform workspace
         run: terraform workspace select -or-create=true ${{ inputs.terraform-workspace }}
         shell: bash
 
