@@ -23,17 +23,17 @@ Your company has decided to use Azure instead of Terraform Cloud to store de Ter
 
     ```terraform
     resource "azurerm_service_plan" "myproj_001" {
-        name = "asp-myproj-dev-001"
+        name = "asp-myproj-dev-ne-001"
         ...
     }
 
     resource "azurerm_linux_web_app" "backend_001" {
-        name = "app-backend-dev-001"
+        name = "app-backend-dev-ne-001"
         ...
     }
 
     resource "azurerm_linux_web_app" "frontend_001" {
-        name = "app-frontend-dev-001"
+        name = "app-frontend-dev-ne-001"
         ...
     }
     ```
@@ -52,7 +52,7 @@ Your company has decided to use Azure instead of Terraform Cloud to store de Ter
 
 `myproj` is the project name.
 
-- Create a Resource Group to store the Terraform state (e.g. `rg-terraform-prod-001`).
+- Create a Resource Group to store the Terraform state (e.g. `rg-terraform-prod-ne-001`).
 
 - Create a Storage Account (e.g. `stterraformprodne001`) with Zone-Redundant Storage redundancy, and soft delete for containers and blobs.
 
@@ -60,11 +60,11 @@ Your company has decided to use Azure instead of Terraform Cloud to store de Ter
 
 ### Configure backups for the Terraform state
 
-- Create a Backup Vault (e.g. `bvault-terraform-prod-001`).
+- Create a Backup Vault (e.g. `bvault-terraform-prod-ne-001`).
 
 - In the Storage Account, assign the role `Storage Account Backup Contributor` to the Backup Vault.
 
-- In the Backup Vault, Create a Backup Vault Policy (e.g. `bkpol-terraform-st-prod-001`).
+- In the Backup Vault, Create a Backup Vault Policy (e.g. `bkpol-terraform-st-prod-ne-001`).
 
 - In the Backup Vault, create a backup, specifying the Backup Vault Policy and the Storage Account as data source.
 
@@ -72,9 +72,9 @@ Your company has decided to use Azure instead of Terraform Cloud to store de Ter
 
 - Create a Resource Group per environment.
 
-- Create a Service Principal (e.g. `sp-myproj-terraform`) to execute Terraform in the project.
+- Create a Service Principal (e.g. `sp-myproj-terraform-001`) to execute Terraform in the project.
 
-- In the Azure Portal, create the Resource Groups (e.g. `rg-myproj-dev-001`).
+- In the Azure Portal, create the Resource Groups (e.g. `rg-myproj-dev-ne-001`).
 
 - To the Service Principal, assign the roles `Contributor`, and `User Access Administrator` to the Resource Groups with the condition "Allow user to assign all roles except privileged administrator roles Owner, UAA, RBAC (Recommended)".
 
@@ -90,7 +90,7 @@ You can use a data source
 
 ```terraform
 data "azurerm_resource_group" "myproj_001" {
-  name = "rg-myproj-${terraform.workspace}-001"
+  name = "rg-myproj-prod-ne-001"
 }
 ```
 
@@ -98,8 +98,8 @@ or import the resources manually (https://www.youtube.com/watch?v=znfh_00EDZ0).
 
 ```bash
 import {
-  to = azurerm_resource_group.testrg_001
-  id = "/subscriptions/111-1111-111111-111/resourceGroups/testrg"
+  to = azurerm_resource_group.myproj_001
+  id = "/subscriptions/111-1111-111111-111/resourceGroups/rg-myproj-prod-ne-001"
 }
 
 terraform plan \
