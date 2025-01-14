@@ -15,24 +15,24 @@ Your company has decided to use Azure instead of Terraform Cloud to store de Ter
     `${local.resource_type.app_service}-${local.project}-${terraform.workspace}-${local.location.north_europe.geo_code}-001`
 
     - **Terraform:**
-    `{application}_{location}_{sequential_number}`.
+    `{application}(_{location})(_{sequential_number})`.
 
     `{application}` can be a compound name splitted by hyphens to have unique resource names in the subscription.
 
     Example:
 
     ```terraform
-    resource "azurerm_service_plan" "myproj_001" {
+    resource "azurerm_service_plan" "myproj" {
         name = "asp-myproj-dev-ne-001"
         ...
     }
 
-    resource "azurerm_linux_web_app" "backend_001" {
+    resource "azurerm_linux_web_app" "backend" {
         name = "app-backend-dev-ne-001"
         ...
     }
 
-    resource "azurerm_linux_web_app" "frontend_001" {
+    resource "azurerm_linux_web_app" "frontend" {
         name = "app-frontend-dev-ne-001"
         ...
     }
@@ -41,10 +41,10 @@ Your company has decided to use Azure instead of Terraform Cloud to store de Ter
 - **Roles:** `{who}_with_{role_name}_in_{resource}`. Example:
 
     ```terraform
-    resource "azurerm_role_assignment" "backend_001_with_key_vault_administrator_in_kv_myproj_001" {
-        scope                = azurerm_key_vault.myproj_001.id
+    resource "azurerm_role_assignment" "backend_with_key_vault_administrator_in_kv_myproj" {
+        scope                = azurerm_key_vault.myproj.id
         role_definition_name = "Key Vault Secrets User"
-        principal_id         = azurerm_linux_web_app.backend_001.identity[0].principal_id
+        principal_id         = azurerm_linux_web_app.backend.identity[0].principal_id
     }
     ```
 
@@ -89,7 +89,7 @@ Your company has decided to use Azure instead of Terraform Cloud to store de Ter
 You can use a data source
 
 ```terraform
-data "azurerm_resource_group" "myproj_001" {
+data "azurerm_resource_group" "myproj" {
   name = "rg-myproj-prod-ne-001"
 }
 ```
@@ -98,7 +98,7 @@ or import the resources manually (https://www.youtube.com/watch?v=znfh_00EDZ0).
 
 ```bash
 import {
-  to = azurerm_resource_group.myproj_001
+  to = azurerm_resource_group.myproj
   id = "/subscriptions/111-1111-111111-111/resourceGroups/rg-myproj-prod-ne-001"
 }
 
