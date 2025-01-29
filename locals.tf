@@ -2,9 +2,9 @@ locals {
   project = "myproj"
 
   workspace = {
-    dev   = "dev"
-    stage = "stg"
-    prod  = "prod"
+    dev = "dev"
+    stg = "stg"
+    pro = "pro"
   }
 
   configuration = jsondecode(file("./workspaces/${terraform.workspace}.tfvars.json"))

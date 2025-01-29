@@ -52,19 +52,19 @@ Your company has decided to use Azure instead of Terraform Cloud to store de Ter
 
 `myproj` is the project name.
 
-- Create a Resource Group to store the Terraform state (e.g. `rg-terraform-prod-ne-001`).
+- Create a Resource Group to store the Terraform state (e.g. `rg-terraform-pro-ne-001`).
 
-- Create a Storage Account (e.g. `stterraformprodne001`) with Zone-Redundant Storage redundancy, and soft delete for containers and blobs.
+- Create a Storage Account (e.g. `stterraformprone001`) with Zone-Redundant Storage redundancy, and soft delete for containers and blobs.
 
 - Create a container (e.g. `myproj-tfstate`).
 
 ### Configure backups for the Terraform state
 
-- Create a Backup Vault (e.g. `bvault-terraform-prod-ne-001`).
+- Create a Backup Vault (e.g. `bvault-terraform-pro-ne-001`).
 
 - In the Storage Account, assign the role `Storage Account Backup Contributor` to the Backup Vault.
 
-- In the Backup Vault, Create a Backup Vault Policy (e.g. `bkpol-terraform-st-prod-ne-001`).
+- In the Backup Vault, Create a Backup Vault Policy (e.g. `bkpol-terraform-st-pro-ne-001`).
 
 - In the Backup Vault, create a backup, specifying the Backup Vault Policy and the Storage Account as data source.
 
@@ -90,7 +90,7 @@ You can use a data source
 
 ```terraform
 data "azurerm_resource_group" "myproj" {
-  name = "rg-myproj-prod-ne-001"
+  name = "rg-myproj-pro-ne-001"
 }
 ```
 
@@ -99,7 +99,7 @@ or import the resources manually (https://www.youtube.com/watch?v=znfh_00EDZ0).
 ```bash
 import {
   to = azurerm_resource_group.myproj
-  id = "/subscriptions/111-1111-111111-111/resourceGroups/rg-myproj-prod-ne-001"
+  id = "/subscriptions/111-1111-111111-111/resourceGroups/rg-myproj-pro-ne-001"
 }
 
 terraform plan \
