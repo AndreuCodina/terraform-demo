@@ -43,7 +43,7 @@ jobs:
 
       - name: Plan Terraform
         run: |
-          terraform plan -input=false -out main.tfplan 
+          terraform plan -input=false -out main.tfplan
         shell: bash
 
       - name: Terraform apply
